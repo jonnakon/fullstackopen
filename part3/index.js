@@ -75,11 +75,11 @@ let persons =[
     
     app.post('/api/persons',(req,res) => {
         const body = req.body
-    
-        const person ={
-            name: body.name,
-            number: body.number,
-            id: generateId()
+
+        if(!body.name && !body.number){
+            return res.status(400).json({
+                error: 'name and number missing'
+            })
         }
     
         if(!body.name){
@@ -92,6 +92,12 @@ let persons =[
             return res.status(400).json({
                 error: 'number missing'
             })
+        }
+
+        const person ={
+            name: body.name,
+            number: body.number,
+            id: generateId()
         }
     
         if(personExists(body.name)){
