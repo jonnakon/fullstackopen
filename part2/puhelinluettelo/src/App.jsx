@@ -69,16 +69,19 @@ const App = () => {
     if(!personExist) {
         personService
           .create(personObject)
-          .then(returnedPerson =>{
-            setPersons(persons.concat(returnedPerson))
+          .then(createdPerson =>{
+            setPersons(persons.concat(createdPerson))
             setNewName('')
             setNewNumber('')
             setErrorMessage(
-              `${personObject.name} added to phonebook `
-            )
+              `${personObject.name} added to phonebook `)
             setTimeout(() => {
               setErrorMessage(null)
             }, 5000)
+          })
+          .catch(error =>{
+            setErrorMessage( <span style={{ color: 'red'}}>
+              `error: ${error.response.data.error}`</span>)
           })
         }
   }    
