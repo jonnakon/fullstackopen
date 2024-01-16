@@ -14,7 +14,7 @@ const requestLogger = (req, res, next) => {
     next()
   }
 
-const errorHandler = (error, reg, res,next) => {
+const errorHandler = (error, req, res,next) => {
     console.error(error.message)
 
     if(error.name == 'CastError') {
